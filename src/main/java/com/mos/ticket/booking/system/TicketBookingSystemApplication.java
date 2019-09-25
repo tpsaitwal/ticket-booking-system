@@ -9,9 +9,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @PropertySource(value = "${CONFIG_LOCATION}")
 @EnableScheduling
 public class TicketBookingSystemApplication {
-
 	public static void main(String[] args) {
 		SpringApplication.run(TicketBookingSystemApplication.class, args);
 	}
-
 }
