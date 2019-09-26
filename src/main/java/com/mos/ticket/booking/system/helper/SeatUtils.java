@@ -97,7 +97,8 @@ public class SeatUtils {
         List<Integer> bookingInProgressSeats = busySeats.get(BookingStatus.BOOKING_UNDER_PROGRESS);
 
         for (Integer seat : seats){
-            if (bookedSeats.contains(seat) || bookingInProgressSeats.contains(seat)){
+            if ((bookedSeats!= null && bookedSeats.contains(seat)) ||
+                    (bookingInProgressSeats!=null && bookingInProgressSeats.contains(seat))){
                 return true;
             }
         }
