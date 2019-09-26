@@ -91,7 +91,7 @@ public class SeatUtils {
      */
     public static boolean seatValidation(final Map<BookingStatus, List<Integer>> busySeats, final List<Integer> seats){
         if (busySeats == null || busySeats.isEmpty())
-            return true;
+            return false;
 
         List<Integer> bookedSeats  = busySeats.get(BookingStatus.BOOKED);
         List<Integer> bookingInProgressSeats = busySeats.get(BookingStatus.BOOKING_UNDER_PROGRESS);

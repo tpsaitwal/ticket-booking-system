@@ -3,7 +3,7 @@ package com.mos.ticket.booking.system.controller;
 import com.mos.ticket.booking.system.constants.BookingStatus;
 import com.mos.ticket.booking.system.dao.impl.BookingDaoImpl;
 import com.mos.ticket.booking.system.dao.impl.SeatDaoImpl;
-import com.mos.ticket.booking.system.dao.pojo.ProcessingPOJO;
+import com.mos.ticket.booking.system.dao.pojo.RowAndColumsOfShow;
 import com.mos.ticket.booking.system.helper.SeatUtils;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.exception.ExceptionUtils;
@@ -79,10 +79,14 @@ public class BookingController {
             log.error("Date parsing error {}", ExceptionUtils.getStackTrace(e));
         }
 
-        ProcessingPOJO  processingPOJO = cityDao.getNumberOfSeats(cityName,theaterName,movieName,inputDate);
+        RowAndColumsOfShow processingPOJO = cityDao.getNumberOfSeats(cityName,theaterName,movieName,inputDate);
+        log.info("Show ID {}", processingPOJO);
         Map busySeats = cityDao.getSeatStatusFromShowId(processingPOJO.getShowId(), getStatusListForQuery());
         Map currentState = SeatUtils.getSeatDistribution(processingPOJO.getNoOfRows(), processingPOJO.getNoOfColumns(), busySeats);
-        return new ResponseEntity(currentState, HttpStatus.OK);
+        if(currentState != null && !currentState.isEmpty())
+            return new ResponseEntity(currentState, HttpStatus.OK);
+
+        return new ResponseEntity("No show exist with this criteria", HttpStatus.OK);
     }
 
 
@@ -112,8 +116,10 @@ public class BookingController {
             log.error("Date parsing error {}", ExceptionUtils.getStackTrace(e));
         }
 
-        ProcessingPOJO  processingPOJO = cityDao.getNumberOfSeats(cityName,theaterName,movieName,inputDate);
+        RowAndColumsOfShow processingPOJO = cityDao.getNumberOfSeats(cityName,theaterName,movieName,inputDate);
+        log.info("RowandColumns {}", processingPOJO);
         Map busySeats = cityDao.getSeatStatusFromShowId(processingPOJO.getShowId(),getStatusListForQuery());
+        log.info("Busy seats {}",busySeats);
         if(SeatUtils.seatValidation(busySeats,seats)){
             return new ResponseEntity( "One or more of seats " + seats +" are booked/blocked.</br> Please select different seats or try after " +
                     (waitMilliSeconds/ (1000*60))+ " minutes.", HttpStatus.NOT_ACCEPTABLE);

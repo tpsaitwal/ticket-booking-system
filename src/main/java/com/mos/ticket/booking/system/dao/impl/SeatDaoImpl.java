@@ -2,9 +2,9 @@ package com.mos.ticket.booking.system.dao.impl;
 
 import com.mos.ticket.booking.system.constants.BookingStatus;
 import com.mos.ticket.booking.system.dao.SeatDao;
-import com.mos.ticket.booking.system.dao.mapper.ProcessingPOJOMapper;
+import com.mos.ticket.booking.system.dao.mapper.RowAndColumsOfShowMapper;
 import com.mos.ticket.booking.system.dao.mapper.SeatStatusForShowMapper;
-import com.mos.ticket.booking.system.dao.pojo.ProcessingPOJO;
+import com.mos.ticket.booking.system.dao.pojo.RowAndColumsOfShow;
 import com.mos.ticket.booking.system.dao.pojo.SeatStatusForShow;
 import com.mos.ticket.booking.system.helper.SeatUtils;
 import org.slf4j.Logger;
@@ -54,7 +54,7 @@ public class SeatDaoImpl implements SeatDao {
      */
     @Override
     @Transactional
-    public ProcessingPOJO getNumberOfSeats(String cityName, String theaterName, String movieName, Date showDate) {
+    public RowAndColumsOfShow getNumberOfSeats(String cityName, String theaterName, String movieName, Date showDate) {
         MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource();
         mapSqlParameterSource.addValue("cityname", cityName);
         mapSqlParameterSource.addValue("theatername", theaterName);
@@ -63,7 +63,7 @@ public class SeatDaoImpl implements SeatDao {
         mapSqlParameterSource.addValue("showdate", queryFormat.format(showDate));
 
         try {
-            return this.namedParameterJdbcTemplate.queryForObject(selectRowsAndColumnsSql, mapSqlParameterSource, new ProcessingPOJOMapper());
+            return this.namedParameterJdbcTemplate.queryForObject(selectRowsAndColumnsSql, mapSqlParameterSource, new RowAndColumsOfShowMapper());
         } catch (EmptyResultDataAccessException em){
             log.info("no data found");
             return null;
