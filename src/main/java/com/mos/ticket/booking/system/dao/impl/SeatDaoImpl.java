@@ -1,7 +1,7 @@
 package com.mos.ticket.booking.system.dao.impl;
 
 import com.mos.ticket.booking.system.constants.BookingStatus;
-import com.mos.ticket.booking.system.dao.CityDao;
+import com.mos.ticket.booking.system.dao.SeatDao;
 import com.mos.ticket.booking.system.dao.mapper.ProcessingPOJOMapper;
 import com.mos.ticket.booking.system.dao.mapper.SeatStatusForShowMapper;
 import com.mos.ticket.booking.system.dao.pojo.ProcessingPOJO;
@@ -25,9 +25,9 @@ import java.util.List;
 import java.util.Map;
 
 @Repository
-public class CityDaoImpl implements CityDao {
+public class SeatDaoImpl implements SeatDao {
 
-    private static final Logger log = LoggerFactory.getLogger(CityDaoImpl.class);
+    private static final Logger log = LoggerFactory.getLogger(SeatDaoImpl.class);
 
     @Autowired
     private JdbcTemplate jdbcTemplate;

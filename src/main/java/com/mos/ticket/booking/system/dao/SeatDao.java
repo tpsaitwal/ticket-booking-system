@@ -7,7 +7,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-public interface CityDao {
+public interface SeatDao {
     ProcessingPOJO getNumberOfSeats(final String cityName,
                                     final String theaterName,
                                     final String movieName,

@@ -2,7 +2,7 @@ package com.mos.ticket.booking.system.controller;
 
 import com.mos.ticket.booking.system.constants.BookingStatus;
 import com.mos.ticket.booking.system.dao.impl.BookingDaoImpl;
-import com.mos.ticket.booking.system.dao.impl.CityDaoImpl;
+import com.mos.ticket.booking.system.dao.impl.SeatDaoImpl;
 import com.mos.ticket.booking.system.dao.pojo.ProcessingPOJO;
 import com.mos.ticket.booking.system.helper.SeatUtils;
 import org.apache.commons.io.FileUtils;
@@ -34,7 +34,7 @@ public class BookingController {
     private static final Logger log = LoggerFactory.getLogger(BookingController.class);
 
     @Autowired
-    private CityDaoImpl cityDao;
+    private SeatDaoImpl cityDao;
 
     @Value("${show.date.rest.format}")
     private String restDateFormat;
